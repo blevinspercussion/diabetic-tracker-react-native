@@ -1,8 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import Header from "./components/Header";
 
 export default function App() {
-  return <View style={styles.container}></View>;
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Health Tracker</Text>
+      <Header />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -10,6 +16,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+  },
+  title: {
+    fontSize: 35,
   },
 });
