@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native-web";
 import { SectionList, View, TouchableOpacity, Text } from "react-native";
 import { useState } from "react";
 
-export default function Header() {
+export default function Header(props, { handleScreens }) {
   const [data, setData] = useState({
     "Blood Sugar": {
       Monday: {
@@ -63,13 +63,16 @@ export default function Header() {
     },
   });
 
-  const [activeHeading, setActiveHeading] = useState("bloodsugar");
+  const handlePress = (heading) => {
+    props.handleScreens(heading);
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => setActiveHeading("bloodsugar")}
+        onPress={() => handlePress("bloodsugar")}
         style={[
-          activeHeading === "bloodsugar"
+          props.activeHeading === "bloodsugar"
             ? styles.headingActive
             : styles.headingInactive,
         ]}
@@ -77,9 +80,9 @@ export default function Header() {
         <Text>Blood Sugar</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => setActiveHeading("exercise")}
+        onPress={() => handlePress("exercise")}
         style={[
-          activeHeading === "exercise"
+          props.activeHeading === "exercise"
             ? styles.headingActive
             : styles.headingInactive,
         ]}
@@ -87,9 +90,9 @@ export default function Header() {
         <Text>Exercise</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => setActiveHeading("food")}
+        onPress={() => handlePress("food")}
         style={[
-          activeHeading === "food"
+          props.activeHeading === "food"
             ? styles.headingActive
             : styles.headingInactive,
         ]}
@@ -97,9 +100,9 @@ export default function Header() {
         <Text>Food</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => setActiveHeading("water")}
+        onPress={() => handlePress("water")}
         style={[
-          activeHeading === "water"
+          props.activeHeading === "water"
             ? styles.headingActive
             : styles.headingInactive,
         ]}
