@@ -9,10 +9,39 @@ export default function App() {
   const [activeHeading, setActiveHeading] = useState("");
   const [bloodSugar, setBloodSugar] = useState([
     {
-      monday: {
-        morning: 0,
-        evening: 0,
-      },
+      day: "Monday",
+      morning: 0,
+      evening: 0,
+    },
+    {
+      day: "Tuesday",
+      morning: 0,
+      evening: 0,
+    },
+    {
+      day: "Wednesday",
+      morning: 0,
+      evening: 0,
+    },
+    {
+      day: "Thursday",
+      morning: 0,
+      evening: 0,
+    },
+    {
+      day: "Friday",
+      morning: 0,
+      evening: 0,
+    },
+    {
+      day: "Saturday",
+      morning: 0,
+      evening: 0,
+    },
+    {
+      day: "Sunday",
+      morning: 0,
+      evening: 0,
     },
   ]);
 
@@ -39,6 +68,13 @@ export default function App() {
       {activeHeading === "bloodsugar" && (
         <View style={styles.content}>
           <Text style={styles.title}>Blood Sugar</Text>
+          {bloodSugar.map((day) => {
+            return (
+              <Text>
+                {day.day} -- {day.morning} -- {day.evening}
+              </Text>
+            );
+          })}
         </View>
       )}
       {activeHeading === "exercise" && (
