@@ -65,7 +65,8 @@ export default function App() {
           </View>
         )}
       </View>
-      {activeHeading === "bloodsugar" && (
+      {activeHeading === "bloodsugar" && <BloodSugarScreen data={bloodSugar} />}
+      {/* {activeHeading === "bloodsugar" && (
         <View style={styles.content}>
           <Text style={styles.title}>Blood Sugar</Text>
           {bloodSugar.map((day) => {
@@ -76,7 +77,7 @@ export default function App() {
             );
           })}
         </View>
-      )}
+      )} */}
       {activeHeading === "exercise" && (
         <View style={styles.content}>
           <Text style={styles.title}>Exercise</Text>
