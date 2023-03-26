@@ -1,17 +1,34 @@
 import { StyleSheet, TextInput } from "react-native";
 import { View, Text } from "react-native";
 
-export default function (props) {
+export default function (props, { handleBloodSugar }) {
+  const handleChange = (timeOfDay, newValue) => {
+    let numValue = Number(newValue);
+    props.handleBloodSugar(props.day, timeOfDay, numValue);
+  };
+
   return (
     <View style={styles.card}>
       <Text style={styles.day}>{props.day}</Text>
       <View style={styles.subContainer}>
         <Text>Morning: </Text>
-        <TextInput style={styles.input} defaultValue={0} />
+        <TextInput
+          style={styles.input}
+          defaultValue={props.morning}
+          keyboardType="numeric"
+          onChangeText={(newText) => {
+            handleChange("morning", newText);
+          }}
+        />
       </View>
       <View style={styles.subContainer}>
         <Text>Evening: </Text>
-        <TextInput style={styles.input} defaultValue={0} />
+        <TextInput
+          style={styles.input}
+          defaultValue={props.evening}
+          keyboardType="numeric"
+          onChangeText={(newText) => handleChange("evening", newText)}
+        />
       </View>
     </View>
   );

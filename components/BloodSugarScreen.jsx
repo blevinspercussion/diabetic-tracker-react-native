@@ -1,11 +1,13 @@
-import { StyleSheet } from "react-native";
-import { View, Text } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import BloodSugarCard from "./BloodSugarCard";
 
-export default function (props) {
+export default function (props, { handleBloodSugar }) {
   let data = props.data;
+  let bloodSugarAverage;
+
   return (
-    <View style={styles.content}>
+    <ScrollView contentContainerStyle={styles.content}>
       <Text style={styles.title}>Blood Sugar</Text>
       {data.map((day) => {
         return (
@@ -13,22 +15,28 @@ export default function (props) {
             day={day.day}
             morning={day.morning}
             evening={day.evening}
+            calculateAverageBloodSugar={props.calculateAverageBloodSugar}
+            handleBloodSugar={props.handleBloodSugar}
           />
         );
       })}
-    </View>
+      <TouchableOpacity onPress={props.calculateAverageBloodSugar}>
+        <Text>Average: {props.averageBloodSugar}</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     top: "10%",
+    width: "100%",
   },
   content: {
     alignItems: "center",
     justifyContent: "flex-start",
     backgroundColor: "#FFFDA2",
-    width: "100%",
+    minWidth: 400,
     minHeight: "100%",
     borderTopWidth: 1,
     borderColor: "black",

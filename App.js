@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Modal, SafeAreaView } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { useState } from "react";
 
 import Header from "./components/Header";
@@ -44,10 +44,44 @@ export default function App() {
       evening: 0,
     },
   ]);
+  const [averageBloodSugar, setAverageBloodSugar] = useState(0);
 
   const handleScreens = (heading) => {
     setActiveHeading(heading);
-    console.log(activeHeading);
+  };
+
+  const calculateAverageBloodSugar = () => {
+    let bloodSugarArray = [];
+    let sumOfArray = 0;
+    let average = 0;
+
+    for (let i = 0; i < bloodSugar.length; i++) {
+      if (bloodSugar[i].morning > 0) {
+        bloodSugarArray.push(bloodSugar[i].morning);
+      }
+      if (bloodSugar[i].evening > 0) {
+        bloodSugarArray.push(bloodSugar[i].evening);
+      }
+    }
+    for (let i = 0; i < bloodSugarArray.length; i++) {
+      sumOfArray += bloodSugarArray[i];
+    }
+    average = sumOfArray / bloodSugarArray.length;
+    setAverageBloodSugar(average);
+  };
+
+  const handleBloodSugar = (day, timeOfDay, newValue) => {
+    const currentDayIndex = bloodSugar.findIndex((bs) => bs.day === day);
+    const updatedDay = {
+      ...bloodSugar[currentDayIndex],
+      [timeOfDay]: newValue,
+    };
+    const newBloodSugar = [
+      ...bloodSugar.slice(0, currentDayIndex),
+      updatedDay,
+      ...bloodSugar.slice(currentDayIndex + 1),
+    ];
+    setBloodSugar(newBloodSugar);
   };
 
   return (
@@ -65,19 +99,15 @@ export default function App() {
           </View>
         )}
       </View>
-      {activeHeading === "bloodsugar" && <BloodSugarScreen data={bloodSugar} />}
-      {/* {activeHeading === "bloodsugar" && (
-        <View style={styles.content}>
-          <Text style={styles.title}>Blood Sugar</Text>
-          {bloodSugar.map((day) => {
-            return (
-              <Text>
-                {day.day} -- {day.morning} -- {day.evening}
-              </Text>
-            );
-          })}
-        </View>
-      )} */}
+      {activeHeading === "bloodsugar" && (
+        <BloodSugarScreen
+          data={bloodSugar}
+          averageBloodSugar={averageBloodSugar}
+          calculateAverageBloodSugar={calculateAverageBloodSugar}
+          handleBloodSugar={handleBloodSugar}
+        />
+      )}
+
       {activeHeading === "exercise" && (
         <View style={styles.content}>
           <Text style={styles.title}>Exercise</Text>
