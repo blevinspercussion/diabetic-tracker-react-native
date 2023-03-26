@@ -7,65 +7,14 @@ import BloodSugarScreen from "./components/BloodSugarScreen";
 
 export default function App() {
   const [activeHeading, setActiveHeading] = useState("");
-  const [data, setData] = useState({
-    bloodsugar: {
-      Monday: {
-        Morning: 0,
-        Evening: 0,
-      },
-      Tuesday: {
-        Morning: 0,
-        Evening: 0,
-      },
-      Wednesday: {
-        Morning: 0,
-        Evening: 0,
-      },
-      Thursday: {
-        Morning: 0,
-        Evening: 0,
-      },
-      Friday: {
-        Morning: 0,
-        Evening: 0,
-      },
-      Saturday: {
-        Morning: 0,
-        Evening: 0,
-      },
-      Sunday: {
-        Morning: 0,
-        Evening: 0,
+  const [bloodSugar, setBloodSugar] = useState([
+    {
+      monday: {
+        morning: 0,
+        evening: 0,
       },
     },
-    Exercise: {
-      Monday: "",
-      Tuesday: "",
-      Wednesday: "",
-      Thursday: "",
-      Friday: "",
-      Saturday: "",
-      Sunday: "",
-    },
-    Food: {
-      Monday: "",
-      Tuesday: "",
-      Wednesday: "",
-      Thursday: "",
-      Friday: "",
-      Saturday: "",
-      Sunday: "",
-    },
-    Water: {
-      Monday: "",
-      Tuesday: "",
-      Wednesday: "",
-      Thursday: "",
-      Friday: "",
-      Saturday: "",
-      Sunday: "",
-    },
-  });
+  ]);
 
   const handleScreens = (heading) => {
     setActiveHeading(heading);
@@ -76,7 +25,7 @@ export default function App() {
     <View style={styles.container}>
       <Text style={styles.title}>Health Tracker</Text>
       <Header activeHeading={activeHeading} handleScreens={handleScreens} />
-      <View style={styles.content}>
+      <View>
         {activeHeading === "" && (
           <View style={styles.content}>
             <Text style={styles.title}>Welcome!</Text>
@@ -87,30 +36,26 @@ export default function App() {
           </View>
         )}
       </View>
-      <View style={styles.content}>
-        {activeHeading === "bloodsugar" && (
-          <View>
-            <Text style={styles.title}>Blood Sugar</Text>
-            {Object.entries(data.bloodsugar).map((item) => {
-              {
-                console.log(item);
-              }
-              <Text>{item}</Text>;
-            })}
-          </View>
-        )}
-      </View>
-      <View style={styles.content}>
-        {activeHeading === "exercise" && (
+      {activeHeading === "bloodsugar" && (
+        <View style={styles.content}>
+          <Text style={styles.title}>Blood Sugar</Text>
+        </View>
+      )}
+      {activeHeading === "exercise" && (
+        <View style={styles.content}>
           <Text style={styles.title}>Exercise</Text>
-        )}
-      </View>
-      <View style={styles.content}>
-        {activeHeading === "food" && <Text style={styles.title}>Food</Text>}
-      </View>
-      <View style={styles.content}>
-        {activeHeading === "water" && <Text style={styles.title}>Water</Text>}
-      </View>
+        </View>
+      )}
+      {activeHeading === "food" && (
+        <View style={styles.content}>
+          <Text style={styles.title}>Food</Text>
+        </View>
+      )}
+      {activeHeading === "water" && (
+        <View style={styles.content}>
+          <Text style={styles.title}>Food</Text>
+        </View>
+      )}
     </View>
   );
 }
