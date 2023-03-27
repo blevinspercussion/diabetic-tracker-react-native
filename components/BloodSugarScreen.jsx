@@ -15,6 +15,7 @@ export default function (props, { handleBloodSugar }) {
             day={day.day}
             morning={day.morning}
             evening={day.evening}
+            key={day.day}
             calculateAverageBloodSugar={props.calculateAverageBloodSugar}
             handleBloodSugar={props.handleBloodSugar}
           />

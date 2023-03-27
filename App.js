@@ -66,7 +66,7 @@ export default function App() {
     for (let i = 0; i < bloodSugarArray.length; i++) {
       sumOfArray += bloodSugarArray[i];
     }
-    average = sumOfArray / bloodSugarArray.length;
+    average = (sumOfArray / bloodSugarArray.length).toFixed(2);
     setAverageBloodSugar(average);
   };
 

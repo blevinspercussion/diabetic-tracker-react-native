@@ -3,7 +3,8 @@ import { View, Text } from "react-native";
 
 export default function (props, { handleBloodSugar }) {
   const handleChange = (timeOfDay, newValue) => {
-    let numValue = Number(newValue);
+    // let numValue = Number(newValue);
+    let numValue = parseInt(newValue);
     props.handleBloodSugar(props.day, timeOfDay, numValue);
   };
 
@@ -14,7 +15,7 @@ export default function (props, { handleBloodSugar }) {
         <Text>Morning: </Text>
         <TextInput
           style={styles.input}
-          defaultValue={props.morning}
+          defaultValue={props.evening === null ? 0 : parseInt(props.morning)}
           keyboardType="numeric"
           onChangeText={(newText) => {
             handleChange("morning", newText);
@@ -25,7 +26,7 @@ export default function (props, { handleBloodSugar }) {
         <Text>Evening: </Text>
         <TextInput
           style={styles.input}
-          defaultValue={props.evening}
+          defaultValue={props.evening === null ? 0 : props.evening}
           keyboardType="numeric"
           onChangeText={(newText) => handleChange("evening", newText)}
         />
